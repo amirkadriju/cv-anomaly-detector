@@ -1,0 +1,20 @@
+# config.yaml
+
+selected_model: autoencoder
+
+models:
+  unet:
+    type: unet
+    in_channels: 3
+    out_channels: 1
+    base_filters: 64
+
+  autoencoder:
+    type: autoencoder
+    in_channels: 3
+    hidden_dims: [16, 32, 64]
+
+  classifier:
+    type: classifier
+    in_channels: 3
+    hidden_dims: [32, 64]
