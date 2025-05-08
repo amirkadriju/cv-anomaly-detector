@@ -1,0 +1,3 @@
+# Ignore raw/unzipped datasets
+data/KolektorSSD
+data/processed_kolektor
