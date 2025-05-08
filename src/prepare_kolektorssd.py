@@ -28,17 +28,17 @@ for folder in sorted(os.listdir(root_dir)):
     if not os.path.isdir(folder_path): continue
 
     for fname in os.listdir(folder_path):
-        if fname.endswith(".jpg"):
+        if fname.endswith('.jpg'):
             base = fname[:-4]
-            img_path = os.path.join(folder_path, base + ".jpg")
-            path = os.path.join(folder_path, base + "_label.bmp")
+            img_path = os.path.join(folder_path, base + '.jpg')
+            path = os.path.join(folder_path, base + '_label.bmp')
 
             if not os.path.exists(path):
                 continue
 
             # Rename the image to avoid overwriting (using the folder name)
-            new_img_name = f"{folder}_{base}.jpg"
-            new_mask_name = f"{folder}_{base}_label.bmp"
+            new_img_name = f'{folder}_{base}.jpg'
+            new_mask_name = f'{folder}_{base}_label.bmp'
 
             
             # Decide if it's train or test
@@ -49,5 +49,5 @@ for folder in sorted(os.listdir(root_dir)):
                 target = test_dir if random.random() < 0.1 else train_dir
 
             # Copy with new names to avoid overwriting
-            shutil.copy(img_path, os.path.join(target, "images", new_img_name))
-            shutil.copy(path, os.path.join(target, "masks", new_mask_name))
+            shutil.copy(img_path, os.path.join(target, 'images', new_img_name))
+            shutil.copy(path, os.path.join(target, 'masks', new_mask_name))
