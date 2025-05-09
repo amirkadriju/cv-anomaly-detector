@@ -22,9 +22,20 @@ class KolektorDataset(Dataset):
         image = Image.open(image_path).convert('RGB')
         mask = Image.open(mask_path).convert('L')  # Grayscale mask
 
+        resize_size = (1240, 500)  # (height, width)
         # Apply transforms
-        image = T.ToTensor()(image)
-        mask = T.ToTensor()(mask)
+        transform_image = T.Compose([
+            T.Resize(resize_size),
+            T.ToTensor()
+        ])
+
+        transform_mask = T.Compose([
+            T.Resize(resize_size, interpolation=Image.NEAREST),
+            T.ToTensor()
+        ])
+
+        image = transform_image(image)
+        mask = transform_mask(mask)
 
         # Binarize mask: 1 if any pixel is non-zero (anomaly), else 0
         label = 1 if torch.any(mask > 0) else 0
