@@ -28,7 +28,9 @@ class Autoencoder(nn.Module):
 
     def forward(self, x):
         z = self.encoder(x)
-        return self.decoder(z)
+        x_reconstructed = self.decoder(z)
+        x_reconstructed = F.interpolate(x_reconstructed, size=x.size()[2:], mode='bilinear', align_corners=False)
+        return x_reconstructed
 
 
 # ---- Classifier ----
